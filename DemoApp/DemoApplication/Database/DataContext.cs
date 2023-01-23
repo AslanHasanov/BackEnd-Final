@@ -2,6 +2,7 @@
 using DemoApplication.Database.Models.Common;
 using DemoApplication.Extensions;
 using Microsoft.EntityFrameworkCore;
+using System.Drawing;
 using System.Reflection;
 
 namespace DemoApplication.Database
@@ -13,8 +14,28 @@ namespace DemoApplication.Database
         {
 
         }
+        public DbSet<Navbar> Navbars { get; set; }
 
-       
+        public DbSet<SubNavbar> SubNavbars { get; set; }
+
+        public DbSet<Slider> Sliders { get; set; }
+        public DbSet<PaymentBenefit> PaymentBenefits { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Models.Color> Colors { get; set; }
+        public DbSet<ProductColor> ProductColors { get; set; }
+        public DbSet<Models.Size> Sizes { get; set; }
+        public DbSet<ProductSize> ProductSizes { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<ProductTag> ProductTags { get; set; }
+
+
+
+
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
