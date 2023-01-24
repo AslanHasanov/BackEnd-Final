@@ -33,6 +33,7 @@ namespace DemoApplication.Areas.Admin.Controllers
         }
         #endregion
 
+
         #region Add
 
         [HttpGet("add", Name = "admin-subnavbar-add")]
@@ -142,6 +143,7 @@ namespace DemoApplication.Areas.Admin.Controllers
             return RedirectToRoute("admin-subnavbar-list");
         }
         #endregion
+
 
         #region Delete
 
