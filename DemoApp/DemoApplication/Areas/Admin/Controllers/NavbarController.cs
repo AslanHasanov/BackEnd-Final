@@ -61,8 +61,7 @@ namespace DemoApplication.Areas.Admin.Controllers
                 Name = model.Name,
                 Order = model.Order,
                 URL = model.URL,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
+           
             };
 
 
