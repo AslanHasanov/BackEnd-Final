@@ -1110,9 +1110,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\ViewComponents\" />
-    <Folder Include="Areas\Admin\ViewModels\" />
   </ItemGroup>
 
 </Project>
