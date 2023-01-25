@@ -4,7 +4,7 @@ namespace DemoApplication.Database.Models
 {
     public class Category : BaseEntity<int>,IAuditable
     {
-        public string Title { get; set; }
+        public string? Title { get; set; }
         public int? ParentId { get; set; }
 
         public DateTime CreatedAt { get; set; }
@@ -12,9 +12,9 @@ namespace DemoApplication.Database.Models
 
 
         public Category? Parent { get; set; }
-        public List<Category> Categories { get; set; }
+        public List<Category>? Categories { get; set; }
 
-        public List<ProductCategory> ProductCategories { get; set; }
+        public List<ProductCategory>? ProductCategories { get; set; }
 
     }
 }
