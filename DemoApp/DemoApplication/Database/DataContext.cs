@@ -29,8 +29,12 @@ namespace DemoApplication.Database
         public DbSet<Models.Size> Sizes { get; set; }
         public DbSet<ProductSize> ProductSizes { get; set; }
         public DbSet<Tag> Tags { get; set; }
-
         public DbSet<ProductTag> ProductTags { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<ClientFeedback> ClientFeedbacks { get; set; }
+        public DbSet<Role> Roles { get; set; }
+
+
 
 
 

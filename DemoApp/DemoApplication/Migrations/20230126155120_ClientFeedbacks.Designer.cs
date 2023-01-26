@@ -4,6 +4,7 @@ using DemoApplication.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoApplication.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230126155120_ClientFeedbacks")]
+    partial class ClientFeedbacks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -318,29 +320,6 @@ namespace DemoApplication.Migrations
                     b.ToTable("ProductTags", (string)null);
                 });
 
-            modelBuilder.Entity("DemoApplication.Database.Models.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles", (string)null);
-                });
-
             modelBuilder.Entity("DemoApplication.Database.Models.Size", b =>
                 {
                     b.Property<int>("Id")
@@ -499,15 +478,10 @@ namespace DemoApplication.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RoleId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
 
                     b.ToTable("Users", (string)null);
                 });
@@ -630,15 +604,6 @@ namespace DemoApplication.Migrations
                     b.Navigation("Navbar");
                 });
 
-            modelBuilder.Entity("DemoApplication.Database.Models.User", b =>
-                {
-                    b.HasOne("DemoApplication.Database.Models.Role", "Roles")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId");
-
-                    b.Navigation("Roles");
-                });
-
             modelBuilder.Entity("DemoApplication.Database.Models.Category", b =>
                 {
                     b.Navigation("Categories");
@@ -667,11 +632,6 @@ namespace DemoApplication.Migrations
                     b.Navigation("ProductSizes");
 
                     b.Navigation("ProductTags");
-                });
-
-            modelBuilder.Entity("DemoApplication.Database.Models.Role", b =>
-                {
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("DemoApplication.Database.Models.Size", b =>

@@ -742,8 +742,4 @@
     <PackageReference Include="MimeKit" Version="3.4.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\ViewComponents\" />
-  </ItemGroup>
-
 </Project>
