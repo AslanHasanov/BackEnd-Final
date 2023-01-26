@@ -37,16 +37,16 @@
                                 <td>@book.Price</td>
                                 <td>@book.Description</td>
                                 <td>@string.Join(", ", book.Categories.Select(c => $"{c.Title}->{c.ParentTitle}"))</td>
-                                <td>@book.CreatedAt.ToString("dd/MM/yyyy")</td>
+                                <td>@book.CreatedAt</td>
                                 <td>@book.UpdatedAt</td>
                                 <td class="text-end">
 
-                                    <a class="btn btn-success" asp-route="admin-product-update" asp-route-id="@book.Id">Update Product</a>
+                                    <a asp-route="admin-product-update" asp-route-id="@book.Id"><i class="las la-pen text-secondary font-16"></i></a>
                                     <form method="POST" asp-route="admin-product-delete" asp-route-id="@book.Id" id="book-form-@book.Id"></form>
-                                    <button class="btn btn-danger" type="submit" form="book-form-@book.Id">
-                                        Delete Product
+                                    <button type="submit" form="book-form-@book.Id">
+                                        <i class="las la-trash-alt text-secondary font-16"></i>
                                     </button>
-                                    <a class="btn btn-primary" asp-route="admin-productimg-list" asp-route-productId="@book.Id">ProductImageList</a>
+                                    <a class="btn btn-secondary" asp-route="admin-productimage-list" asp-route-productId="@book.Id">ProductImageList</a>
                                 </td>
                             </tr>
                         }

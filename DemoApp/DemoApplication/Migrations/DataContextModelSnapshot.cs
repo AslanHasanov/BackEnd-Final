@@ -37,7 +37,6 @@ namespace DemoApplication.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -150,11 +149,9 @@ namespace DemoApplication.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Price")
@@ -178,9 +175,6 @@ namespace DemoApplication.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CatagoryId")
-                        .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -461,7 +455,7 @@ namespace DemoApplication.Migrations
                         .IsRequired();
 
                     b.HasOne("DemoApplication.Database.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductColors")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -474,7 +468,7 @@ namespace DemoApplication.Migrations
             modelBuilder.Entity("DemoApplication.Database.Models.ProductImage", b =>
                 {
                     b.HasOne("DemoApplication.Database.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductImages")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -485,7 +479,7 @@ namespace DemoApplication.Migrations
             modelBuilder.Entity("DemoApplication.Database.Models.ProductSize", b =>
                 {
                     b.HasOne("DemoApplication.Database.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductSizes")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -504,7 +498,7 @@ namespace DemoApplication.Migrations
             modelBuilder.Entity("DemoApplication.Database.Models.ProductTag", b =>
                 {
                     b.HasOne("DemoApplication.Database.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductTags")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -551,6 +545,14 @@ namespace DemoApplication.Migrations
             modelBuilder.Entity("DemoApplication.Database.Models.Product", b =>
                 {
                     b.Navigation("ProductCategories");
+
+                    b.Navigation("ProductColors");
+
+                    b.Navigation("ProductImages");
+
+                    b.Navigation("ProductSizes");
+
+                    b.Navigation("ProductTags");
                 });
 
             modelBuilder.Entity("DemoApplication.Database.Models.Size", b =>

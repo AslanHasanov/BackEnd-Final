@@ -39,10 +39,10 @@ namespace DemoApplication.Areas.Admin.Controllers
 
 
             return View(model);
-        } 
+        }
         #endregion
 
-        #region Add'
+        #region Add
 
         [HttpGet("add", Name = "admin-product-add")]
         public async Task<IActionResult> AddAsync()
@@ -165,7 +165,7 @@ namespace DemoApplication.Areas.Admin.Controllers
                 {
                     var productCatagory = new ProductCategory
                     {
-                        CatagoryId = catagoryId,
+                        CategoryId = catagoryId,
                         Product = product,
                     };
 
@@ -240,7 +240,7 @@ namespace DemoApplication.Areas.Admin.Controllers
                 Categories = await _dataContext.Categories
                 .Select(c => new CategoryListItemViewModel(c.Id, c.Title)).ToListAsync(),
                 CategoryIds = product.ProductCategories!
-                .Select(pc => pc.CatagoryId).ToList(),
+                .Select(pc => pc.CategoryId).ToList(),
 
                 Sizes = await _dataContext.Sizes
                 .Select(c => new SizeListItemViewModel(c.Id, c.Title)).ToListAsync(),
@@ -339,7 +339,7 @@ namespace DemoApplication.Areas.Admin.Controllers
                    .Select(c => new CategoryListItemViewModel(c.Id, c.Title))
                    .ToList();
 
-                model.CategoryIds = product.ProductCategories!.Select(c => c.CatagoryId).ToList();
+                model.CategoryIds = product.ProductCategories!.Select(c => c.CategoryId).ToList();
 
                 model.Sizes = _dataContext.Sizes
                  .Select(c => new SizeListItemViewModel(c.Id, c.Title))
@@ -370,17 +370,17 @@ namespace DemoApplication.Areas.Admin.Controllers
    
 
         
-                var categoriesInDatacontext = product.ProductCategories!.Select(bc => bc.CatagoryId).ToList();
+                var categoriesInDatacontext = product.ProductCategories!.Select(bc => bc.CategoryId).ToList();
                 var categoriesToRemove = categoriesInDatacontext.Except(model.CategoryIds).ToList();
                 var categoriesToAdd = model.CategoryIds.Except(categoriesInDatacontext).ToList();
 
-                product.ProductCategories!.RemoveAll(bc => categoriesToRemove.Contains(bc.CatagoryId));
+                product.ProductCategories!.RemoveAll(bc => categoriesToRemove.Contains(bc.CategoryId));
 
                 foreach (var categoryId in categoriesToAdd)
                 {
                     var productCatagory = new ProductCategory
                     {
-                        CatagoryId = categoryId,
+                        CategoryId = categoryId,
                         Product = product,
                     };
 

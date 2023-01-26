@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoApplication.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230123161812_ProductColors")]
-    partial class ProductColors
+    [Migration("20230125171555_Categoryies")]
+    partial class Categoryies
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,7 +39,6 @@ namespace DemoApplication.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -152,11 +151,9 @@ namespace DemoApplication.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Price")
@@ -180,9 +177,6 @@ namespace DemoApplication.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CatagoryId")
-                        .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -250,6 +244,75 @@ namespace DemoApplication.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImagees", (string)null);
+                });
+
+            modelBuilder.Entity("DemoApplication.Database.Models.ProductSize", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SizeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("SizeId");
+
+                    b.ToTable("ProductSizes", (string)null);
+                });
+
+            modelBuilder.Entity("DemoApplication.Database.Models.ProductTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("ProductTags", (string)null);
+                });
+
+            modelBuilder.Entity("DemoApplication.Database.Models.Size", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sizes", (string)null);
                 });
 
             modelBuilder.Entity("DemoApplication.Database.Models.Slider", b =>
@@ -334,6 +397,29 @@ namespace DemoApplication.Migrations
                     b.ToTable("SubNavbars", (string)null);
                 });
 
+            modelBuilder.Entity("DemoApplication.Database.Models.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags", (string)null);
+                });
+
             modelBuilder.Entity("DemoApplication.Database.Models.Category", b =>
                 {
                     b.HasOne("DemoApplication.Database.Models.Category", "Parent")
@@ -371,7 +457,7 @@ namespace DemoApplication.Migrations
                         .IsRequired();
 
                     b.HasOne("DemoApplication.Database.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductColors")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -384,12 +470,50 @@ namespace DemoApplication.Migrations
             modelBuilder.Entity("DemoApplication.Database.Models.ProductImage", b =>
                 {
                     b.HasOne("DemoApplication.Database.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("ProductImages")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("DemoApplication.Database.Models.ProductSize", b =>
+                {
+                    b.HasOne("DemoApplication.Database.Models.Product", "Product")
+                        .WithMany("ProductSizes")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DemoApplication.Database.Models.Size", "Size")
+                        .WithMany("ProductSizes")
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Size");
+                });
+
+            modelBuilder.Entity("DemoApplication.Database.Models.ProductTag", b =>
+                {
+                    b.HasOne("DemoApplication.Database.Models.Product", "Product")
+                        .WithMany("ProductTags")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DemoApplication.Database.Models.Tag", "Tag")
+                        .WithMany("ProductTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("DemoApplication.Database.Models.SubNavbar", b =>
@@ -423,6 +547,24 @@ namespace DemoApplication.Migrations
             modelBuilder.Entity("DemoApplication.Database.Models.Product", b =>
                 {
                     b.Navigation("ProductCategories");
+
+                    b.Navigation("ProductColors");
+
+                    b.Navigation("ProductImages");
+
+                    b.Navigation("ProductSizes");
+
+                    b.Navigation("ProductTags");
+                });
+
+            modelBuilder.Entity("DemoApplication.Database.Models.Size", b =>
+                {
+                    b.Navigation("ProductSizes");
+                });
+
+            modelBuilder.Entity("DemoApplication.Database.Models.Tag", b =>
+                {
+                    b.Navigation("ProductTags");
                 });
 #pragma warning restore 612, 618
         }
