@@ -4,12 +4,12 @@ using DemoApplication.Database.Models;
 
 namespace DemoApplication.Database.Configuration
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class ClientFeedbackConfiguration : IEntityTypeConfiguration<ClientFeedback>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<ClientFeedback> builder)
         {
             builder
-               .ToTable("Users");
+               .ToTable("ClientFeedbacks");
         }
     }
 }
