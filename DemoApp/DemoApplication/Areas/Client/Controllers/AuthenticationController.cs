@@ -1,4 +1,5 @@
-﻿using DemoApplication.Areas.Client.ViewModels.Authentication;
+﻿using DemoApplication.Areas.Client.Validation;
+using DemoApplication.Areas.Client.ViewModels.Authentication;
 using DemoApplication.Contracts.Identity;
 using DemoApplication.Database;
 using DemoApplication.Services.Abstracts;
@@ -24,6 +25,8 @@ namespace DemoApplication.Areas.Client.Controllers
         #region Register'
 
         [HttpGet("register", Name = "client-auth-register")]
+        [ServiceFilter(typeof(CurrentUserAtributeValidation))]
+
         public async Task<IActionResult> Register()
         {
             return View();

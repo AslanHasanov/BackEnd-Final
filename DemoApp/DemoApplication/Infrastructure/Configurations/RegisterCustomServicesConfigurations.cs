@@ -1,4 +1,5 @@
-﻿using DemoApplication.Database;
+﻿using DemoApplication.Areas.Client.Validation;
+using DemoApplication.Database;
 using DemoApplication.Services.Abstracts;
 using DemoApplication.Services.Concretes;
 
@@ -12,6 +13,8 @@ namespace DemoApplication.Infrastructure.Configurations
             services.AddScoped<IEmailService, SMTPService>();
             services.AddScoped<IUserActivationService, UserActivationService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<CurrentUserAtributeValidation>();
+
         }
     }
 }

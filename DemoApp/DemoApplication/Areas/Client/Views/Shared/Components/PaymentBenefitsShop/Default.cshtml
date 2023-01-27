@@ -1,0 +1,18 @@
+﻿@using DemoApplication.Areas.Client.ViewModels.Home
+@model IndexViewModel
+
+@foreach (var paymentBenefit in Model.PaymentBenefits)
+{
+    <li class="service-item">
+        <div class="service-img">
+            <img src="~/@paymentBenefit.BackGroundImageUrl"
+             alt="Shipping Icon" />
+        </div>
+        <div class="service-content">
+            <span class="title">
+                @paymentBenefit.Title 
+                <br />
+            </span>
+        </div>
+    </li>
+}

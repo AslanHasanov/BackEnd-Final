@@ -1,4 +1,5 @@
 ﻿using AspNetCore.IServiceCollection.AddIUrlHelper;
+using DemoApplication.Areas.Client.Validation;
 using DemoApplication.Infrastructure.Configurations;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Text.Json.Serialization;
@@ -25,6 +26,9 @@ namespace DemoApplication.Infrastructure.Extensions
 
             services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+            services.AddScoped<CurrentUserAtributeValidation>();
+
 
             services.ConfigureDatabase(configuration);
 
