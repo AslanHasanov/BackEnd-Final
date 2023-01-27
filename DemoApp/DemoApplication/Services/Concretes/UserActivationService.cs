@@ -4,11 +4,11 @@ using System.Net.Mail;
 using Microsoft.AspNetCore.Mvc;
 using DemoApplication.Services.Abstracts;
 using DemoApplication.Contracts.Email;
-using PrioniaApp.Contracts.Email;
+
 
 namespace DemoApplication.Services.Concretes
 {
-    public class UserActivationService : Abstracts.IUserActivationService
+    public class UserActivationService : IUserActivationService
     {
         private readonly DataContext _dataContext;
         private readonly IHttpContextAccessor _httpContextAccessor;

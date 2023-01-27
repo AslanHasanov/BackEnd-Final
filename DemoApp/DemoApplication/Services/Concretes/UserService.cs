@@ -38,7 +38,7 @@ namespace DemoApplication.Services.Concretes
                 {
                     return _currentUser;
                 }
-                var idClaim = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(u => u.Type == CustomClaimNames.ID);
+                var idClaim = _httpContextAccessor.HttpContext!.User.Claims.FirstOrDefault(u => u.Type == CustomClaimNames.ID);
 
                 if (idClaim is null)
                 {
@@ -53,7 +53,7 @@ namespace DemoApplication.Services.Concretes
 
         public bool IsAuthenticated
         {
-            get => _httpContextAccessor!.HttpContext.User.Identity!.IsAuthenticated;
+            get => _httpContextAccessor!.HttpContext!.User.Identity!.IsAuthenticated;
         }
 
         public string GetCurrentUserFullName()

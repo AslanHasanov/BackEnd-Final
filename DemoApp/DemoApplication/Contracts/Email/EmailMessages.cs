@@ -1,4 +1,4 @@
-﻿using PrioniaApp.Contracts.Email;
+﻿using DemoApplication.Contracts.Email;
 
 namespace DemoApplication.Contracts.Email
 {

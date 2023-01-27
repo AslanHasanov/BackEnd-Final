@@ -1,4 +1,4 @@
-﻿namespace PrioniaApp.Contracts.Email
+﻿namespace DemoApplication.Contracts.Email
 {
     public class EmailMessageKeyword
     {
