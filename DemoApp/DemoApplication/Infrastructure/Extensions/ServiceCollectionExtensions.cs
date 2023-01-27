@@ -26,7 +26,6 @@ namespace DemoApplication.Infrastructure.Extensions
             services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
-
             services.ConfigureDatabase(configuration);
 
             services.ConfigureOptions(configuration);

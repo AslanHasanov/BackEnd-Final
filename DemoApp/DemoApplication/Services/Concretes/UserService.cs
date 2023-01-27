@@ -21,13 +21,13 @@ namespace DemoApplication.Services.Concretes
 
         public UserService(DataContext dataContext,
             IHttpContextAccessor httpContextAccessor,
-            IUserActivationService userActivationService,
-            User currentUser)
+            IUserActivationService userActivationService
+            )
         {
             _dataContext = dataContext;
             _httpContextAccessor = httpContextAccessor;
             _userActivationService = userActivationService;
-            _currentUser = currentUser;
+           
         }
 
         public User CurrentUser
