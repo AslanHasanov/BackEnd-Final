@@ -57,7 +57,10 @@ namespace DemoApplication.Services.Concretes
                     return $"{initialSegment}/sliders/{fileName}";
                 case UploadDirectory.PaymentBenefits:
                     return $"{initialSegment}/paymentBenefits/{fileName}";
+                case UploadDirectory.ClientFeedbacks:
+                    return $"{initialSegment}/feedback/{fileName}";
                 default:
+
                     throw new Exception("Something went wrong");
             }
         }

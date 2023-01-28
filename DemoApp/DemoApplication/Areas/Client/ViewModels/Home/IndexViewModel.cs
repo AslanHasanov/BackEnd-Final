@@ -5,5 +5,6 @@
         public List<SliderViewModel> Sliders { get; set; }
         public List<PaymentBenefitsViewModel> PaymentBenefits { get; set; }
         public List<ProductViewModel> Products { get; set; }
+        public List<ClientFeedbackViewModel> ClientFeedbacks { get; set; }
     }
 }
