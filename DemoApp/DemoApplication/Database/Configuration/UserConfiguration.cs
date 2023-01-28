@@ -9,7 +9,12 @@ namespace DemoApplication.Database.Configuration
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder
-               .ToTable("Users");
+             .ToTable("Users");
+
+            builder
+              .HasOne(u => u.Basket)
+                .WithOne(b => b.User)
+                  .HasForeignKey<Basket>(u => u.UserId);
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿@using DemoApplication.Areas.Client.ViewCompanents
+﻿
+@using DemoApplication.Areas.Client.ViewCompanents;
+
+@using DemoApplication.Areas.Client.ViewComponents;
 @using DemoApplication.Services.Abstracts
 @inject IUserService userService
 
@@ -20,7 +23,6 @@
     <!-- CSS
     ============================================ -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <link rel="stylesheet" href="~/client/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/client/assets/css/font-awesome.min.css" />
     <link rel="stylesheet" href="~/client/assets/css/Pe-icon-7-stroke.css" />
@@ -131,19 +133,19 @@
                                                 <i class="pe-7s-users"></i>
                                             </button>
                                             <ul class="dropdown-menu"
+                                                aria-labelledby="settingButton">
                                                 <li>
                                                     <a asp-route="client-account-dashboard" class="dropdown-item">My account</a>
                                                 </li>
                                                 <li>
                                                     @if (userService.IsAuthenticated)
                                                     {
-                                                                <a class="dropdown-item" asp-route="client-account-dashboard">@userService.GetCurrentUserFullName()</a>
-                                                                    <a class="dropdown-item" asp-route="client-auth-logout">Log Out</a>
+                                                        <a class="dropdown-item" asp-route="client-account-dashboard">@userService.GetCurrentUserFullName()</a>
                                                     }
                                                     else
                                                     {
-                                                            <a class="dropdown-item" asp-route="client-auth-register">Register</a>
-                                                            <a class="dropdown-item" asp-route="client-auth-login">Login</a>
+                                                        <a class="dropdown-item" asp-route="client-auth-login">Login</a>
+                                                        <a class="dropdown-item" asp-route="client-auth-register">Register</a>   
                                                     }
                                                 </li>
                                             </ul>
@@ -156,7 +158,7 @@
                                         <li class="minicart-wrap me-3 me-lg-0">
                                             <a href="#miniCart" class="minicart-btn toolbar-btn">
                                                 <i class="pe-7s-shopbag"></i>
-                                                <span class="quantity">3</span>
+                                                <span class="quantity"></span>
                                             </a>
                                         </li>
                                         <li class="mobile-menu_wrap d-block d-lg-none">
@@ -176,13 +178,7 @@
 
 
 
-
-
-
             @await Component.InvokeAsync(nameof(Navbar)));
-
-
-
 
             <div class="mobile-menu_wrapper" id="mobileMenu">
                 <div class="offcanvas-body">
@@ -472,9 +468,6 @@
             </div>
 
 
-
-
-
             <div class="modal fade"
                  id="exampleModal"
                  tabindex="-1"
@@ -521,102 +514,16 @@
 
 
             <div class="offcanvas-minicart_wrapper" id="miniCart">
-                <div class="offcanvas-body">
-                    <div class="minicart-content">
-                        <div class="minicart-heading">
-                            <h4 class="mb-0">Shopping Cart</h4>
-                            <a href="#" class="button-close">
-                                <i class="pe-7s-close"
-                                   data-tippy="Close"
-                                   data-tippy-inertia="true"
-                                   data-tippy-animation="shift-away"
-                                   data-tippy-delay="50"
-                                   data-tippy-arrow="true"
-                                   data-tippy-theme="sharpborder"></i>
-                            </a>
-                        </div>
-                        <ul class="minicart-list">
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="#">
-                                    <i class="pe-7s-close"
-                                       data-tippy="Remove"
-                                       data-tippy-inertia="true"
-                                       data-tippy-animation="shift-away"
-                                       data-tippy-delay="50"
-                                       data-tippy-arrow="true"
-                                       data-tippy-theme="sharpborder"></i>
-                                </a>
-                                <a href="single-product-variable.html"
-                                   class="product-item_img">
-                                    <img class="img-full"
-                                         src="~/client/assets/images/product/small-size/2-1-70x78.png"
-                                         alt="Product Image" />
-                                </a>
-                                <div class="product-item_content">
-                                    <a class="product-item_title"
-                                       href="single-product-variable.html">American Marigold</a>
-                                    <span class="product-item_quantity">1 x $23.45</span>
-                                </div>
-                            </li>
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="#">
-                                    <i class="pe-7s-close"
-                                       data-tippy="Remove"
-                                       data-tippy-inertia="true"
-                                       data-tippy-animation="shift-away"
-                                       data-tippy-delay="50"
-                                       data-tippy-arrow="true"
-                                       data-tippy-theme="sharpborder"></i>
-                                </a>
-                                <a href="single-product-variable.html"
-                                   class="product-item_img">
-                                    <img class="img-full"
-                                         src="~/client/assets/images/product/small-size/2-2-70x78.png"
-                                         alt="Product Image" />
-                                </a>
-                                <div class="product-item_content">
-                                    <a class="product-item_title"
-                                       href="single-product-variable.html">Black Eyed Susan</a>
-                                    <span class="product-item_quantity">1 x $25.45</span>
-                                </div>
-                            </li>
-                            <li class="minicart-product">
-                                <a class="product-item_remove" href="#">
-                                    <i class="pe-7s-close"
-                                       data-tippy="Remove"
-                                       data-tippy-inertia="true"
-                                       data-tippy-animation="shift-away"
-                                       data-tippy-delay="50"
-                                       data-tippy-arrow="true"
-                                       data-tippy-theme="sharpborder"></i>
-                                </a>
-                                <a href="single-product-variable.html"
-                                   class="product-item_img">
-                                    <img class="img-full"
-                                         src="~/client/assets/images/product/small-size/2-3-70x78.png"
-                                         alt="Product Image" />
-                                </a>
-                                <div class="product-item_content">
-                                    <a class="product-item_title"
-                                       href="single-product-variable.html">Bleeding Heart</a>
-                                    <span class="product-item_quantity">1 x $30.45</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="minicart-item_total">
-                        <span>Subtotal</span>
-                        <span class="ammount">$79.35</span>
-                    </div>
-                    <div class="group-btn_wrap d-grid gap-2">
-                        <a href="cart.html" class="btn btn-dark">View Cart</a>
-                        <a href="checkout.html" class="btn btn-dark">Checkout</a>
-                    </div>
+                <div class="offcanvas-body cart-block">
+                    @await Component.InvokeAsync(nameof(BasketMini));
                 </div>
             </div>
+
+
             <div class="global-overlay"></div>
         </header>
         <!-- Main Header Area End Here -->
+
         @RenderBody();
 
 
@@ -796,6 +703,8 @@
         </div>
         <!-- Footer Area End Here -->
         <!-- Begin Modal Area -->
+
+
         <div class="modal quick-view-modal fade"
              id="quickModal"
              data-bs-backdrop="static"
@@ -817,14 +726,14 @@
                                 data-tippy-arrow="true"
                                 data-tippy-theme="sharpborder"></button>
                     </div>
-                    <div class="modal-body modalProduct">
-                        <div class="modal-wrap row">
-                           
-                        </div>
+                    <div class="modal-body product-details-modal">
+
                     </div>
                 </div>
             </div>
         </div>
+
+
         <!-- Modal Area End Here -->
         <!-- Begin Scroll To Top -->
         <a class="scroll-to-top" href="">
@@ -838,21 +747,21 @@
     ============================================ -->
 
     <script src="~/client/assets/js/vendor/bootstrap.bundle.min.js"></script>
-    <script src="~/client/assets/js/vendor/jquery-3.6.0.min.js"></script>
-    <script src="~/client/assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
-    <script src="~/client/assets/js/vendor/jquery.waypoints.js"></script>
+    <script src="~/Client/assets/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="~/Client/assets/js/vendor/jquery-migrate-3.3.2.min.js"></script>
+    <script src="~/Client/assets/js/vendor/jquery.waypoints.js"></script>
     <script src="~/client/assets/js/vendor/modernizr-3.11.2.min.js"></script>
     <script src="~/client/assets/js/plugins/wow.min.js"></script>
-    <script src="~/client/assets/js/plugins/swiper-bundle.min.js"></script>
-    <script src="~/client/assets/js/plugins/jquery.nice-select.js"></script>
-    <script src="~/client/assets/js/plugins/parallax.min.js"></script>
-    <script src="~/client/assets/js/plugins/jquery.magnific-popup.min.js"></script>
-    <script src="~/client/assets/js/plugins/tippy.min.js"></script>
-    <script src="~/client/assets/js/plugins/ion.rangeSlider.min.js"></script>
-    <script src="~/Client/assets/js/QuickModal.js" asp-append-version="true"></script>
+    <script src="~/client/assets/js/plugins/swiper-bundle.min.js" asp-append-version="true"></script>
+    <script src="~/Client/assets/js/plugins/jquery.nice-select.js" asp-append-version="true"></script>
+    <script src="~/client/assets/js/plugins/parallax.min.js" asp-append-version="true"></script>
+    <script src="~/Client/assets/js/plugins/jquery.magnific-popup.min.js" asp-append-version="true"></script>
+    <script src="~/client/assets/js/plugins/tippy.min.js" asp-append-version="true"></script>
+    <script src="~/client/assets/js/plugins/ion.rangeSlider.min.js" asp-append-version="true"></script>
     <script src="~/client/assets/js/plugins/mailchimp-ajax.js"></script>
-    <script src="~/client/assets/js/plugins/jquery.counterup.js"></script>
-
+    <script src="~/Client/assets/js/plugins/jquery.counterup.js"></script>
+    <script src="~/Client/assets/js/QuickModal.js" asp-append-version="true"></script>
+    @*<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>*@
     <!--Main JS (Common Activation Codes)-->
     <script src="~/client/assets/js/main.js"></script>
 </body>

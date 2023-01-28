@@ -14,6 +14,7 @@ namespace DemoApplication.Infrastructure.Configurations
             services.AddScoped<IUserActivationService, UserActivationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<CurrentUserAtributeValidation>();
+            services.AddScoped<IBasketService, BasketService>();
 
         }
     }

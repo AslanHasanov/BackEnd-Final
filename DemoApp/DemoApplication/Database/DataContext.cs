@@ -34,6 +34,10 @@ namespace DemoApplication.Database
         public DbSet<ClientFeedback> ClientFeedbacks { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserActivation> UserActivations { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+
+        public DbSet<BasketProduct> BasketProducts { get; set; }
+
 
 
 

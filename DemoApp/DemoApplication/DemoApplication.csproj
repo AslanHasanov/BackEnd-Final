@@ -22,7 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Client\Views\CardPage\Index.cshtml" />
     <None Include="Areas\Client\Views\Home\Index.cshtml" />
+    <None Include="Areas\Client\Views\Shared\Components\CardPage\Default.cshtml" />
+    <None Include="Areas\Client\Views\Shared\Components\BasketMini\Default.cshtml" />
     <None Include="Areas\Client\Views\Shared\Components\Navbar\Default.cshtml" />
     <None Include="Areas\Client\Views\Shared\Components\PaymentBenefitsShop\Default.cshtml" />
     <None Include="wwwroot\admin\assets\css\app-dark-rtl.min.css.map" />

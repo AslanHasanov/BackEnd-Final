@@ -19,6 +19,8 @@ namespace DemoApplication.Database.Models
         public int? RoleId { get; set; }
         public Role? Roles { get; set; }
 
+        public Basket? Basket { get; set; }
+
 
     }
 }

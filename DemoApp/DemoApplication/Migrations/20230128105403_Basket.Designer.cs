@@ -4,6 +4,7 @@ using DemoApplication.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoApplication.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230128105403_Basket")]
+    partial class Basket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,38 +47,6 @@ namespace DemoApplication.Migrations
                         .IsUnique();
 
                     b.ToTable("baskets", (string)null);
-                });
-
-            modelBuilder.Entity("DemoApplication.Database.Models.BasketProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("BasketId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BasketId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("basket-products", (string)null);
                 });
 
             modelBuilder.Entity("DemoApplication.Database.Models.Category", b =>
@@ -620,25 +590,6 @@ namespace DemoApplication.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DemoApplication.Database.Models.BasketProduct", b =>
-                {
-                    b.HasOne("DemoApplication.Database.Models.Basket", "Basket")
-                        .WithMany("BasketProducts")
-                        .HasForeignKey("BasketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DemoApplication.Database.Models.Product", "Product")
-                        .WithMany("BasketProducts")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Basket");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("DemoApplication.Database.Models.Category", b =>
                 {
                     b.HasOne("DemoApplication.Database.Models.Category", "Parent")
@@ -777,11 +728,6 @@ namespace DemoApplication.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DemoApplication.Database.Models.Basket", b =>
-                {
-                    b.Navigation("BasketProducts");
-                });
-
             modelBuilder.Entity("DemoApplication.Database.Models.Category", b =>
                 {
                     b.Navigation("Categories");
@@ -801,8 +747,6 @@ namespace DemoApplication.Migrations
 
             modelBuilder.Entity("DemoApplication.Database.Models.Product", b =>
                 {
-                    b.Navigation("BasketProducts");
-
                     b.Navigation("ProductCategories");
 
                     b.Navigation("ProductColors");

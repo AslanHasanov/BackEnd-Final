@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace DemoApplication.Database.Configurations
+namespace DemoApplication.Database.Configuration
 {
     public class NavbarConfiguration : IEntityTypeConfiguration<Navbar>
     {
