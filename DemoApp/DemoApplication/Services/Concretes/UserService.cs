@@ -9,6 +9,8 @@ using DemoApplication.Contracts.Identity;
 using DemoApplication.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using DemoApplication.Areas.Client.ViewModels.Authentication;
+using DemoApplication.Areas.Client.ViewModels.Basket;
+using System.Text.Json;
 
 namespace DemoApplication.Services.Concretes
 {
@@ -19,10 +21,10 @@ namespace DemoApplication.Services.Concretes
         private readonly IUserActivationService _userActivationService;
         private User _currentUser;
 
-        public UserService(DataContext dataContext,
+        public UserService(
+            DataContext dataContext,
             IHttpContextAccessor httpContextAccessor,
-            IUserActivationService userActivationService
-            )
+            IUserActivationService userActivationService )
         {
             _dataContext = dataContext;
             _httpContextAccessor = httpContextAccessor;
@@ -34,22 +36,21 @@ namespace DemoApplication.Services.Concretes
         {
             get
             {
-                if (_currentUser is not null)
-                {
-                    return _currentUser;
-                }
+                if (_currentUser is not null) return _currentUser;
+
+
                 var idClaim = _httpContextAccessor.HttpContext!.User.Claims.FirstOrDefault(u => u.Type == CustomClaimNames.ID);
 
                 if (idClaim is null)
                 {
                     throw new IdentityCookieException("Identity cookie not found");
                 }
+
                 _currentUser = _dataContext.Users.First(u => u.Id == int.Parse(idClaim.Value));
 
                 return _currentUser;
             }
         }
-
 
         public bool IsAuthenticated
         {
@@ -68,6 +69,7 @@ namespace DemoApplication.Services.Concretes
             {
                 return false;
             }
+
             return true;
         }
 
@@ -78,10 +80,12 @@ namespace DemoApplication.Services.Concretes
             {
                 new Claim(CustomClaimNames.ID,id.ToString())
             };
+
             if (role is not null)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
+
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var userPrincipal = new ClaimsPrincipal(identity);
 
@@ -105,7 +109,45 @@ namespace DemoApplication.Services.Concretes
 
         public async Task CreateAsync(RegisterViewModel model)
         {
-            var user = await CreateUser();
+            var user = new User
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+                Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
+                RoleId = 6,
+            };
+            await _dataContext.Users.AddAsync(user);
+
+
+            var basket = new Basket
+            {
+                User = user,
+            };
+            await _dataContext.Baskets.AddAsync(basket);
+
+
+
+            var productCookieValue = _httpContextAccessor.HttpContext!.Request.Cookies["products"];
+            if (productCookieValue is not null)
+            {
+                var productsCookieViewModel = JsonSerializer.Deserialize<List<BasketCookieViewModel>>(productCookieValue);
+
+                foreach (var cookieViewModel in productsCookieViewModel!)
+                {
+                    var product = await _dataContext.Products.FirstOrDefaultAsync(p => p.Id == cookieViewModel.Id);
+
+                    var basketProduct = new BasketProduct
+                    {
+                        Basket = basket,
+                        ProductId = product!.Id,
+                        Quantity = cookieViewModel.Quantity
+                    };
+
+                    await _dataContext.BasketProducts.AddAsync(basketProduct);
+                }
+            }
+
 
             await _userActivationService.SendActivationUrlAsync(user);
 
@@ -113,22 +155,6 @@ namespace DemoApplication.Services.Concretes
             await _dataContext.SaveChangesAsync();
 
 
-
-
-            async Task<User> CreateUser()
-            {
-                var user = new User
-                {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    Email = model.Email,
-                    Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
-                  
-                };
-                await _dataContext.Users.AddAsync(user);
-
-                return user;
-            }
 
         }
     }

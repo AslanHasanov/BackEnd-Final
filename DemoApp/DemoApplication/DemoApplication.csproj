@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <Content Remove="Areas\Client\Views\Index.cshtml" />
+    <Content Remove="wwwroot\Client\assets\js\Basket.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -676,6 +677,7 @@
     <None Include="wwwroot\Client\assets\fonts\Pe-icon-7-stroke.svg" />
     <None Include="wwwroot\Client\assets\images\offcanvas\close-white.svg" />
     <None Include="wwwroot\Client\assets\images\website-images\1-270x300.webp" />
+    <None Include="wwwroot\Client\assets\js\Basket.js" />
     <None Include="wwwroot\Client\assets\js\main.js" />
     <None Include="wwwroot\Client\assets\js\plugins.min.js" />
     <None Include="wwwroot\Client\assets\js\plugins\ion.rangeSlider.min.js" />

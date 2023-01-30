@@ -53,7 +53,7 @@ namespace DemoApplication.Areas.Client.Controllers
 
             var model = new ModalViewModel(product.Name!, product.Description!, product.Price,
                 product.ProductImages!.Take(1).FirstOrDefault() != null
-                ? _fileService.GetFileUrl(product.ProductImages.Take(1).FirstOrDefault()!.ImageNameInFileSystem, UploadDirectory.Products)
+                ? _fileService.GetFileUrl(product.ProductImages!.Take(1).FirstOrDefault()!.ImageNameInFileSystem, UploadDirectory.Products)
                 : String.Empty,
 
                 _dataContext.ProductColors.Include(pc => pc.Color).Where(pc => pc.ProductId == product.Id)

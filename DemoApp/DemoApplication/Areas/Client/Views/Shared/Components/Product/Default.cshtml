@@ -8,7 +8,7 @@
     <div class="col-xl-3 col-md-4 col-sm-6">
         <div class="product-item">
             <div class="product-img">
-                <a asp-route="client-shop-index" asp-route-id="@product.Id">
+                <a asp-route="client-shop-index" asp-route-id=@product.Id>
                     <img class="primary-img"
                      src="~/@product.MainImgUrl"
                      alt="Product Images" />
@@ -19,7 +19,7 @@
                 <div class="product-add-action">
                     <ul>
                         <li class="quuickview-btn">
-                            <a class="modalProduct" asp-route="Product-GetProduct" asp-route-id="@product.Id" data-toggle="modal" data-target="#quickModal"
+                            <a  asp-route="Product-GetProduct" asp-route-id="@product.Id" class="modalProduct" data-toggle="modal" data-target="#quickModal"
                            data-tippy="Quickview"
                            data-tippy-inertia="true"
                            data-tippy-animation="shift-away"
@@ -30,7 +30,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="add-product-to-basket-btn" asp-route="client-basket-add"
+                            <a class="add-basket-btn" asp-route="client-basket-add"
                            asp-route-id="@product.Id"
                            data-id="@product.Id"
                            data-tippy="Add to cart"

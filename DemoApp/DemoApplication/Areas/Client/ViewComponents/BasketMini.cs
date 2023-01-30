@@ -30,9 +30,9 @@ namespace DemoApplication.Areas.Client.ViewComponents
             {
                 var model = await _dataContext.BasketProducts.Where(p => p.Basket.UserId == _userService.CurrentUser.Id)
                    .Select(p =>
-                   new BasketCookieViewModel(p.ProductId, p.Product.Name,
-                   p.Product.ProductImages.Take(1).FirstOrDefault()! != null
-                   ? _fileService.GetFileUrl(p.Product.ProductImages.Take(1).FirstOrDefault().ImageNameInFileSystem, Contracts.File.UploadDirectory.Products)
+                   new BasketCookieViewModel(p.ProductId, p.Product!.Name,
+                   p.Product.ProductImages!.Take(1).FirstOrDefault()! != null
+                   ? _fileService.GetFileUrl(p.Product.ProductImages!.Take(1).FirstOrDefault()!.ImageNameInFileSystem, Contracts.File.UploadDirectory.Products)
                    : String.Empty,
                    p.Quantity, p.Product.Price, p.Product.Price * p.Quantity)).ToListAsync();
 

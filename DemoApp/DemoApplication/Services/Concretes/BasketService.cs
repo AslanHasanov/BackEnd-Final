@@ -45,7 +45,7 @@ namespace DemoApplication.Services.Concretes
             {
                 var basketProduct = await _dataContext.BasketProducts
                    .Include(b => b.Basket)
-                   .FirstOrDefaultAsync(bp => bp.Basket.User.Id == _userService.CurrentUser.Id && bp.ProductId == product.Id);
+                   .FirstOrDefaultAsync(bp => bp.Basket!.User.Id == _userService.CurrentUser.Id && bp.ProductId == product.Id);
 
                 if (basketProduct is not null)
                 {

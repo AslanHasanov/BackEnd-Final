@@ -19,7 +19,7 @@
         @foreach (var product in Model)
         {
           <li class="minicart-product">
-                <a asp-route="client-basket-delete" asp-route-productId="@product.Id" data-id="@product.Id" class="product-item_remove  remove-product-to-basket-btn">
+                <a asp-route="client-basket-delete" asp-route-productId="@product.Id" data-id="@product.Id" class="product-item_remove  remove-basket-btn">
                 <i class="pe-7s-close"
                    data-tippy="Remove"
                    data-tippy-inertia="true"
@@ -50,5 +50,5 @@
 </div>
 <div class="group-btn_wrap d-grid gap-2">
     <a asp-route="client-card-page-index" class="btn btn-dark">View Cart</a>
-    <a href="checkout.html" class="btn btn-dark">Checkout</a>
+    <a asp-route="client-order-checkout" class="btn btn-dark">Checkout</a>
 </div>

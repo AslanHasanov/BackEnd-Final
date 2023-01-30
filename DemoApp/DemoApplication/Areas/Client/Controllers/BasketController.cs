@@ -52,7 +52,7 @@ namespace DemoApplication.Areas.Client.Controllers
             if (_userService.IsAuthenticated)
             {
                 var basketProduct = await _dataContext.BasketProducts
-                   .Include(b => b.Basket).FirstOrDefaultAsync(bp => bp.Basket.UserId == _userService.CurrentUser.Id && bp.ProductId == productId);
+                   .Include(b => b.Basket).FirstOrDefaultAsync(bp => bp.Basket!.UserId == _userService.CurrentUser.Id && bp.ProductId == productId);
 
                 if (basketProduct is null)
                 {
@@ -63,15 +63,13 @@ namespace DemoApplication.Areas.Client.Controllers
             else
             {
                 var product = await _dataContext.Products.FirstOrDefaultAsync(p => p.Id == productId);
-                if (product is null)
-                {
-                    return NotFound();
-                }
+
+                if (product is null) { return NotFound(); }
+         
                 var productCookieValue = HttpContext.Request.Cookies["products"];
-                if (productCookieValue is null)
-                {
-                    return NotFound();
-                }
+
+                if (productCookieValue is null) { return NotFound(); }
+              
 
                 productCookieViewModel = JsonSerializer.Deserialize<List<BasketCookieViewModel>>(productCookieValue);
 
@@ -81,6 +79,7 @@ namespace DemoApplication.Areas.Client.Controllers
 
 
             await _dataContext.SaveChangesAsync();
+
             return ViewComponent(nameof(BasketMini), productCookieViewModel);
         }
         #endregion
