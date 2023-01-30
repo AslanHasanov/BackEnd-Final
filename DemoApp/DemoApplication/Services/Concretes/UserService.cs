@@ -122,7 +122,8 @@ namespace DemoApplication.Services.Concretes
 
             var basket = new Basket
             {
-                User = user,
+                //User = user,
+                UserId = user.Id,
             };
             await _dataContext.Baskets.AddAsync(basket);
 

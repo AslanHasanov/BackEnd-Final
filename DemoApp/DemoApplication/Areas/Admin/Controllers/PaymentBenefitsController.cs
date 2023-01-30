@@ -3,6 +3,7 @@ using DemoApplication.Contracts.File;
 using DemoApplication.Database;
 using DemoApplication.Database.Models;
 using DemoApplication.Services.Abstracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,8 @@ namespace DemoApplication.Areas.Admin.Controllers
 {
     [Area("admin")]
     [Route("admin/paymentBenefits")]
+    [Authorize(Roles = "admin")]
+
     public class PaymentBenefitsController : Controller
     {
         private readonly DataContext _dataContext;

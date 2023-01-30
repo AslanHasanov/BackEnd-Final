@@ -4,12 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 using DemoApplication.Areas.Admin.ViewModels.SubNavbar;
 using Microsoft.EntityFrameworkCore;
 using DemoApplication.Database.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DemoApplication.Areas.Admin.Controllers
 {
 
     [Area("admin")]
     [Route("admin/subnavbar")]
+    [Authorize(Roles = "admin")]
+
     public class SubNavbarController : Controller
     {
         private readonly DataContext _dataContext;

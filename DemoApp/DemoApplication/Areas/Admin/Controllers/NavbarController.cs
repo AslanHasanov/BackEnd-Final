@@ -1,6 +1,7 @@
 ﻿using DemoApplication.Areas.Admin.ViewModels.Navbar;
 using DemoApplication.Database;
 using DemoApplication.Database.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,8 @@ namespace DemoApplication.Areas.Admin.Controllers
 {
     [Area("admin")]
     [Route("admin/navbar")]
+    [Authorize(Roles = "admin")]
+
     public class NavbarController : Controller
     {
         private readonly DataContext _dataContext;

@@ -195,11 +195,8 @@ namespace DemoApplication.Migrations
 
             modelBuilder.Entity("DemoApplication.Database.Models.Order", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -235,10 +232,7 @@ namespace DemoApplication.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("OrderId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("OrderId1")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -257,7 +251,7 @@ namespace DemoApplication.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId1");
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("ProductId");
 
@@ -745,7 +739,7 @@ namespace DemoApplication.Migrations
                 {
                     b.HasOne("DemoApplication.Database.Models.Order", "Order")
                         .WithMany("OrderProducts")
-                        .HasForeignKey("OrderId1");
+                        .HasForeignKey("OrderId");
 
                     b.HasOne("DemoApplication.Database.Models.Product", "Product")
                         .WithMany()
