@@ -40,6 +40,7 @@ namespace DemoApplication.Database
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<Contact> Contacts { get; set; }
 
 
 
