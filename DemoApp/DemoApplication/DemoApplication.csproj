@@ -31,6 +31,10 @@
     <None Include="Areas\Client\Views\Shared\Components\BasketMini\Default.cshtml" />
     <None Include="Areas\Client\Views\Shared\Components\Navbar\Default.cshtml" />
     <None Include="Areas\Client\Views\Shared\Components\PaymentBenefitsShop\Default.cshtml" />
+    <None Include="Areas\Client\Views\Shared\Components\ShopPageCategory\Default.cshtml" />
+    <None Include="Areas\Client\Views\Shared\Components\ShopPageColor\Default.cshtml" />
+    <None Include="Areas\Client\Views\Shared\Components\ShopPageProduct\Default.cshtml" />
+    <None Include="Areas\Client\Views\Shared\Components\ShopPageTag\Default.cshtml" />
     <None Include="wwwroot\admin\assets\css\app-dark-rtl.min.css.map" />
     <None Include="wwwroot\admin\assets\css\app-dark.min.css.map" />
     <None Include="wwwroot\admin\assets\css\app-material.min.css.map" />
@@ -737,6 +741,7 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
     <PackageReference Include="MailKit" Version="3.4.3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.11">
       <PrivateAssets>all</PrivateAssets>
@@ -749,6 +754,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
     <PackageReference Include="MimeKit" Version="3.4.3" />
   </ItemGroup>
 

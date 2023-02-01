@@ -4,7 +4,7 @@ $(document).ready(function () {
 
   
 
-    $(document).on("click", ".quuickview-btn", function (e) {
+    $(document).on("click", ".show-product-modal", function (e) {
         e.preventDefault();
 
         var url = e.target.parentElement.href;

@@ -1,25 +1,23 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@using DemoApplication.Areas.Client.ViewModels.Home
-@using DemoApplication.Areas.Client.ViewCompanents
-@model IndexViewModel
+﻿@using DemoApplication.Areas.Client.ViewModels.ShopPage;
+@model List<ListItemViewModel>
 
-@foreach (var product in Model.Products)
+@foreach (var item in Model)
 {
-    <div class="col-xl-3 col-md-4 col-sm-6">
+    <div class="col-md-4 col-sm-6">
         <div class="product-item">
             <div class="product-img">
-                <a asp-route="client-shop-index" asp-route-id=@product.Id>
+                <a href="single-product-variable.html">
                     <img class="primary-img"
-                     src="~/@product.MainImgUrl"
+                     src="~/@item.MainImgUrl"
                      alt="Product Images" />
                     <img class="secondary-img"
-                     src="~/@product.HoverImgUrl"
+                     src="~/@item.HoverImgUrl"
                      alt="Product Images" />
                 </a>
                 <div class="product-add-action">
                     <ul>
                         <li class="quuickview-btn">
-                            <a class="show-product-modal" asp-route="Product-GetProduct" asp-route-id="@product.Id" data-toggle="modal" data-target="#quickModal"
+                            <a class="show-product-modal" asp-route="Product-GetProduct" asp-route-id="@item.Id" data-toggle="modal" data-target="#quickModal"
                            data-tippy="Quickview"
                            data-tippy-inertia="true"
                            data-tippy-animation="shift-away"
@@ -31,8 +29,8 @@
                         </li>
                         <li>
                             <a class="add-basket-btn" asp-route="client-basket-add"
-                           asp-route-id="@product.Id"
-                           data-id="@product.Id"
+                           asp-route-id="@item.Id"
+                           data-id="@item.Id"
                            data-tippy="Add to cart"
                            data-tippy-inertia="true"
                            data-tippy-animation="shift-away"
@@ -46,9 +44,10 @@
                 </div>
             </div>
             <div class="product-content">
-                <a class="product-name" href="shop.html">@product.Name</a>
+                <a class="product-name"
+               href="single-product-variable.html">@item.Name</a>
                 <div class="price-box pb-1">
-                    <span class="new-price">$@product.Price</span>
+                    <span class="new-price">$@item.Price</span>
                 </div>
                 <div class="rating-box">
                     <ul>
