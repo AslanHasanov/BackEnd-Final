@@ -58,7 +58,9 @@ namespace DemoApplication.Services.Concretes
                 case UploadDirectory.PaymentBenefits:
                     return $"{initialSegment}/paymentBenefits/{fileName}";
                 case UploadDirectory.ClientFeedbacks:
-                    return $"{initialSegment}/feedback/{fileName}";
+                    return $"{initialSegment}/clientfeedbacks/{fileName}";
+                case UploadDirectory.Blog:
+                    return $"{initialSegment}/blog/{fileName}";
                 default:
 
                     throw new Exception("Something went wrong");
@@ -82,6 +84,11 @@ namespace DemoApplication.Services.Concretes
                     return Path.Combine(startPath, "sliders");
                 case UploadDirectory.PaymentBenefits:
                     return Path.Combine(startPath, "paymentBenefits");
+                case UploadDirectory.ClientFeedbacks:
+                    return Path.Combine(startPath, "clientfeedbacks");
+
+                case UploadDirectory.Blog:
+                    return Path.Combine(startPath, "blog");
                 default:
                     throw new Exception("Something went wrong");
             }
