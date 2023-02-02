@@ -10,12 +10,12 @@ namespace DemoApplication.Areas.Client.Controllers
     [Route("contact")]
     public class ContactController : Controller
     {
-        private readonly DataContext _dbContext;
+        private readonly DataContext _dataContext;
         private readonly IUserService _userService;
 
-        public ContactController(DataContext dbContext, IUserService userService)
+        public ContactController(DataContext dataContext, IUserService userService)
         {
-            _dbContext = dbContext;
+            _dataContext = dataContext;
             _userService = userService;
         }
 
@@ -45,8 +45,8 @@ namespace DemoApplication.Areas.Client.Controllers
 
             };
 
-            await _dbContext.Contacts.AddAsync(contact);
-            await _dbContext.SaveChangesAsync();
+            await _dataContext.Contacts.AddAsync(contact);
+            await _dataContext.SaveChangesAsync();
 
             return RedirectToRoute("client-home-index");
         }

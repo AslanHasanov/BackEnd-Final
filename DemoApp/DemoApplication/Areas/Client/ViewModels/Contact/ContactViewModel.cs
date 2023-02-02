@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
-using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribute;
 
 
 namespace DemoApplication.Areas.Client.ViewModels.Contact
