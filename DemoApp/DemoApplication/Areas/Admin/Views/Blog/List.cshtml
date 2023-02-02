@@ -11,7 +11,7 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Books</h4>
+            <h4 class="card-title">Blogs</h4>
         </div><!--end card-header-->
         <div class="card-body">
             <div class="table-responsive">
@@ -28,21 +28,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var book in Model)
+                        @foreach (var blog in Model)
                         {
                             <tr>
-                                <td>@book.Title</td>
-                                <td>@book.Content</td>
-                                <td>@book.CreatedAt.ToString("dd/MM/yyyy")</td>
-                                <td>@string.Join(", ", book.Categories.Select(c => $"{c.Title}->{c.ParentTitle}"))</td>
+                                <td>@blog.Title</td>
+                                <td>@blog.Content</td>
+                                <td>@blog.CreatedAt.ToString("dd/MM/yyyy")</td>
+                                <td>@string.Join(", ", blog.Categories.Select(c => $"{c.Title}->{c.ParentTitle}"))</td>
                                 <td class="text-end">
 
-                                    <a class="btn btn-success" asp-route="admin-blog-update" asp-route-id="@book.Id">Update Blog</a>
-                                    <form method="POST" asp-route="admin-blog-delete" asp-route-id="@book.Id" id="book-form-@book.Id"></form>
-                                    <button class="btn btn-danger" type="submit" form="book-form-@book.Id">
-                                        Delete Blog
+                                    <a asp-route="admin-blog-update" asp-route-id="@blog.Id"><i class="las la-pen text-secondary font-16"></i></a>
+                                    <form method="POST" asp-route="admin-blog-delete" asp-route-id="@blog.Id" id="blog-form-@blog.Id"></form>
+                                    <button type="submit" form="nav-form-@blog.Id">
+                                        <i class="las la-trash-alt text-secondary font-16"></i>
                                     </button>
-                                    <a class="btn btn-primary" asp-route="admin-blogimage-list" asp-route-blogId="@book.Id">Blog Image List</a>
+                                    <a class="btn btn-primary" asp-route="admin-blogimage-list" asp-route-blogId="@blog.Id">Blog Image List</a>
                                 </td>
                             </tr>
                         }
