@@ -4,6 +4,7 @@ using DemoApplication.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoApplication.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230202125053_BlogAndBlogCategory")]
+    partial class BlogAndBlogCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,29 +129,6 @@ namespace DemoApplication.Migrations
                     b.HasIndex("BlogId");
 
                     b.ToTable("BlogAndBlogCategories", (string)null);
-                });
-
-            modelBuilder.Entity("DemoApplication.Database.Models.BlogAndBlogTag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("BlogId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BlogTagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlogId");
-
-                    b.HasIndex("BlogTagId");
-
-                    b.ToTable("BlogAndBlogTags", (string)null);
                 });
 
             modelBuilder.Entity("DemoApplication.Database.Models.BlogCategory", b =>
@@ -922,25 +901,6 @@ namespace DemoApplication.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("DemoApplication.Database.Models.BlogAndBlogTag", b =>
-                {
-                    b.HasOne("DemoApplication.Database.Models.Blog", "Blog")
-                        .WithMany("BlogAndTags")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DemoApplication.Database.Models.BlogTag", "Tag")
-                        .WithMany("Tags")
-                        .HasForeignKey("BlogTagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
-
-                    b.Navigation("Tag");
-                });
-
             modelBuilder.Entity("DemoApplication.Database.Models.BlogCategory", b =>
                 {
                     b.HasOne("DemoApplication.Database.Models.BlogCategory", "Parent")
@@ -1136,8 +1096,6 @@ namespace DemoApplication.Migrations
                 {
                     b.Navigation("BlogAndCategories");
 
-                    b.Navigation("BlogAndTags");
-
                     b.Navigation("BlogDisplays");
                 });
 
@@ -1146,11 +1104,6 @@ namespace DemoApplication.Migrations
                     b.Navigation("BlogAndCategories");
 
                     b.Navigation("Categories");
-                });
-
-            modelBuilder.Entity("DemoApplication.Database.Models.BlogTag", b =>
-                {
-                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("DemoApplication.Database.Models.Category", b =>

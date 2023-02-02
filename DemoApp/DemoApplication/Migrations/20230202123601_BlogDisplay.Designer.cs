@@ -4,6 +4,7 @@ using DemoApplication.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoApplication.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230202123601_BlogDisplay")]
+    partial class BlogDisplay
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,80 +108,6 @@ namespace DemoApplication.Migrations
                     b.ToTable("Blogs", (string)null);
                 });
 
-            modelBuilder.Entity("DemoApplication.Database.Models.BlogAndBlogCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("BlogCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BlogId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlogCategoryId");
-
-                    b.HasIndex("BlogId");
-
-                    b.ToTable("BlogAndBlogCategories", (string)null);
-                });
-
-            modelBuilder.Entity("DemoApplication.Database.Models.BlogAndBlogTag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("BlogId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BlogTagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlogId");
-
-                    b.HasIndex("BlogTagId");
-
-                    b.ToTable("BlogAndBlogTags", (string)null);
-                });
-
-            modelBuilder.Entity("DemoApplication.Database.Models.BlogCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
-
-                    b.ToTable("BlogCategories", (string)null);
-                });
-
             modelBuilder.Entity("DemoApplication.Database.Models.BlogDisplay", b =>
                 {
                     b.Property<int>("Id")
@@ -214,29 +142,6 @@ namespace DemoApplication.Migrations
                     b.HasIndex("BlogId");
 
                     b.ToTable("BlogDisplays", (string)null);
-                });
-
-            modelBuilder.Entity("DemoApplication.Database.Models.BlogTag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BlogTags", (string)null);
                 });
 
             modelBuilder.Entity("DemoApplication.Database.Models.Category", b =>
@@ -903,53 +808,6 @@ namespace DemoApplication.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("DemoApplication.Database.Models.BlogAndBlogCategory", b =>
-                {
-                    b.HasOne("DemoApplication.Database.Models.BlogCategory", "Category")
-                        .WithMany("BlogAndCategories")
-                        .HasForeignKey("BlogCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DemoApplication.Database.Models.Blog", "Blog")
-                        .WithMany("BlogAndCategories")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
-
-                    b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("DemoApplication.Database.Models.BlogAndBlogTag", b =>
-                {
-                    b.HasOne("DemoApplication.Database.Models.Blog", "Blog")
-                        .WithMany("BlogAndTags")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DemoApplication.Database.Models.BlogTag", "Tag")
-                        .WithMany("Tags")
-                        .HasForeignKey("BlogTagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
-
-                    b.Navigation("Tag");
-                });
-
-            modelBuilder.Entity("DemoApplication.Database.Models.BlogCategory", b =>
-                {
-                    b.HasOne("DemoApplication.Database.Models.BlogCategory", "Parent")
-                        .WithMany("Categories")
-                        .HasForeignKey("ParentId");
-
-                    b.Navigation("Parent");
-                });
-
             modelBuilder.Entity("DemoApplication.Database.Models.BlogDisplay", b =>
                 {
                     b.HasOne("DemoApplication.Database.Models.Blog", "Blog")
@@ -1134,23 +992,7 @@ namespace DemoApplication.Migrations
 
             modelBuilder.Entity("DemoApplication.Database.Models.Blog", b =>
                 {
-                    b.Navigation("BlogAndCategories");
-
-                    b.Navigation("BlogAndTags");
-
                     b.Navigation("BlogDisplays");
-                });
-
-            modelBuilder.Entity("DemoApplication.Database.Models.BlogCategory", b =>
-                {
-                    b.Navigation("BlogAndCategories");
-
-                    b.Navigation("Categories");
-                });
-
-            modelBuilder.Entity("DemoApplication.Database.Models.BlogTag", b =>
-                {
-                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("DemoApplication.Database.Models.Category", b =>

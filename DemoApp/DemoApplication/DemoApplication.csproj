@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Views\Contact\List.cshtml" />
     <None Include="Areas\Admin\Views\Order\List.cshtml" />
     <None Include="Areas\Admin\Views\Order\Update.cshtml" />
     <None Include="Areas\Client\Views\CardPage\Index.cshtml" />
