@@ -61,6 +61,8 @@ namespace DemoApplication.Services.Concretes
                     return $"{initialSegment}/clientfeedbacks/{fileName}";
                 case UploadDirectory.Blog:
                     return $"{initialSegment}/blog/{fileName}";
+                case UploadDirectory.Prize:
+                    return $"{initialSegment}/prize/{fileName}";
                 default:
 
                     throw new Exception("Something went wrong");
@@ -89,6 +91,8 @@ namespace DemoApplication.Services.Concretes
 
                 case UploadDirectory.Blog:
                     return Path.Combine(startPath, "blog");
+                case UploadDirectory.Prize:
+                    return Path.Combine(startPath, "prize");
                 default:
                     throw new Exception("Something went wrong");
             }

@@ -47,6 +47,7 @@ namespace DemoApplication.Database
         public DbSet<BlogAndBlogCategory> BlogAndBlogCategories { get; set; }
         public DbSet<BlogAndBlogTag> BlogAndBlogTags { get; set; }
         public DbSet<BlogDisplay> BlogDisplays { get; set; }
+        public DbSet<Prize> Prizes { get; set; }
 
 
 
