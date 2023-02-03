@@ -28,8 +28,9 @@ namespace DemoApplication.Areas.Client.ViewComponents
                 b.BlogDisplays!.Take(1).FirstOrDefault() != null
                 ? _fileService.GetFileUrl(b.BlogDisplays!.Take(1).FirstOrDefault()!.FileNameInSystem, Contracts.File.UploadDirectory.Blog)
                 : String.Empty,
-                b.BlogDisplays!.FirstOrDefault()!.IsImage,
-                b.BlogDisplays!.FirstOrDefault()!.IsVidio,
+
+                b.BlogDisplays!.FirstOrDefault()!.IsImage != null! ? b.BlogDisplays!.FirstOrDefault()!.IsImage : default,
+                b.BlogDisplays!.FirstOrDefault()!.IsVidio != null! ? b.BlogDisplays!.FirstOrDefault()!.IsVidio : default,
                 b.CreatedAt,
                 b.BlogAndTags!.Select(b => b.Tag).Select(b => new BlogViewModel.TagViewModel(b.Title)).ToList(),
                 b.BlogAndCategories!.Select(b => b.Category)
