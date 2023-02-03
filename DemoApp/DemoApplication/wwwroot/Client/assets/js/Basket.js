@@ -60,13 +60,6 @@ $(document).ready(function () {
         let category = e.target.previousElementSibling
         let CategoryId = category.value;
 
-
-        console.log(CategoryId)
-
-        console.log(aHref)
-
-
-
         $.ajax(
             {
                 type: "GET",
@@ -77,17 +70,14 @@ $(document).ready(function () {
                 },
 
                 success: function (response) {
-                    console.log(response)
                     $('.filtered-area').html(response);
 
                 },
                 error: function (err) {
                     $(".modalProduct").html(err.responseText);
-
                 }
 
             });
-
     })
 
     $(document).on("click", '.select-color', function (e) {
@@ -95,14 +85,7 @@ $(document).ready(function () {
         let aHref = e.target.href;
         let category = e.target.previousElementSibling
         let CategoryId = category.value;
-
-
-        console.log(CategoryId)
-
-        console.log(aHref)
-
-
-
+    
         $.ajax(
             {
                 type: "GET",
@@ -113,17 +96,13 @@ $(document).ready(function () {
                 },
 
                 success: function (response) {
-                    console.log(response)
                     $('.filtered-area').html(response);
 
                 },
                 error: function (err) {
                     $(".modalProduct").html(err.responseText);
-
                 }
-
             });
-
     })
 
     $(document).on("click", '.select-tag', function (e) {
@@ -132,13 +111,6 @@ $(document).ready(function () {
         let category = e.target.previousElementSibling
         let CategoryId = category.value;
 
-
-        console.log(CategoryId)
-
-        console.log(aHref)
-
-
-
         $.ajax(
             {
                 type: "GET",
@@ -149,17 +121,13 @@ $(document).ready(function () {
                 },
 
                 success: function (response) {
-                    console.log(response)
                     $('.filtered-area').html(response);
 
                 },
                 error: function (err) {
                     $(".modalProduct").html(err.responseText);
-
                 }
-
             });
-
     })
 
 
@@ -168,14 +136,9 @@ $(document).ready(function () {
 
         let minPrice = e.target.previousElementSibling.children[0].children[3].innerText.slice(1);
         let MinPrice = parseInt(minPrice);
-
         let maxPrice = e.target.previousElementSibling.children[0].children[4].innerText.slice(1);
         let MaxPrice = parseInt(maxPrice);
         let aHref = document.querySelector(".shoppage-url").href;
-
-        console.log(MinPrice);
-        console.log(MaxPrice);
-        console.log(aHref)
 
         $.ajax(
             {
@@ -184,21 +147,14 @@ $(document).ready(function () {
                 data: {
                     MinPrice: MinPrice,
                     MaxPrice: MaxPrice
-
                 },
 
                 success: function (response) {
                     $('.filtered-area').html(response);
-
-
                 },
                 error: function (err) {
                     $(".modalProduct").html(err.responseText);
-
                 }
-
             });
-
-
     })
 })

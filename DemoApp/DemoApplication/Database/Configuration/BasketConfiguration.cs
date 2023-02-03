@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DemoApplication.Database.Configuration
 {
-    public class PrizeConfiguration : IEntityTypeConfiguration<Prize>
+    public class BasketConfiguration : IEntityTypeConfiguration<Basket>
     {
-        public void Configure(EntityTypeBuilder<Prize> builder)
+        public void Configure(EntityTypeBuilder<Basket> builder)
         {
             builder
-                .ToTable("Prizes");
+                .ToTable("Baskets");
         }
     }
 }

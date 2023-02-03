@@ -58,6 +58,7 @@ namespace DemoApplication.Database
 
 
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly<Program>();

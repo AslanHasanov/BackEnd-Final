@@ -40,6 +40,7 @@
     <None Include="Areas\Client\Views\Shared\Components\BasketMini\Default.cshtml" />
     <None Include="Areas\Client\Views\Shared\Components\Navbar\Default.cshtml" />
     <None Include="Areas\Client\Views\Shared\Components\PaymentBenefitsShop\Default.cshtml" />
+    <None Include="Areas\Client\Views\Shared\Components\Prize\Default.cshtml" />
     <None Include="Areas\Client\Views\Shared\Components\ShopPageCategory\Default.cshtml" />
     <None Include="Areas\Client\Views\Shared\Components\ShopPageColor\Default.cshtml" />
     <None Include="Areas\Client\Views\Shared\Components\ShopPageProduct\Default.cshtml" />
