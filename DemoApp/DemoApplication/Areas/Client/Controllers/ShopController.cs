@@ -48,8 +48,8 @@ namespace DemoApplication.Areas.Client.Controllers
                 .Select(ps => new ShopViewModel.SizeViewModeL(ps.Size!.Title, ps.Size.Id)).ToList(),
 
                 _dataContext.ProductTags.Include(ps => ps.Tag).Where(ps => ps.ProductId == product.Id)
-                .Select(ps => new ShopViewModel.TagViewModeL(ps.Tag!.Title, ps.Tag.Id)).ToList()
-                );
+                .Select(ps => new ShopViewModel.TagViewModeL(ps.Tag!.Title, ps.Tag.Id)).ToList());
+
             return View(model);
         }
     }

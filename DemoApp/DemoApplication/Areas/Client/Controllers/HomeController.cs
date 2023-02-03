@@ -60,8 +60,8 @@ namespace DemoApplication.Areas.Client.Controllers
                 .Select(pc => new ModalViewModel.ColorViewModeL(pc.Color!.Name, pc.Color.Id)).ToList(),
 
                 _dataContext.ProductSizes.Include(ps => ps.Size).Where(ps => ps.ProductId == product.Id)
-                .Select(ps => new ModalViewModel.SizeViewModeL(ps.Size!.Title, ps.Size.Id)).ToList()
-                );
+                .Select(ps => new ModalViewModel.SizeViewModeL(ps.Size!.Title, ps.Size.Id)).ToList() );
+
 
             return PartialView("~/Areas/Client/Views/Shared/_ProductModalPartial.cshtml", model);
         }

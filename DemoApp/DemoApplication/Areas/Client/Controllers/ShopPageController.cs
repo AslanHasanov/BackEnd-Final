@@ -24,13 +24,18 @@ namespace DemoApplication.Areas.Client.Controllers
             _fileService = fileService;
         }
 
-       
+
+        #region Index'
 
         [HttpGet("index", Name = "client-shoppage-index")]
         public IActionResult Index()
         {
             return View();
         }
+
+        #endregion
+
+        #region Filter'
 
         [HttpGet("Filter", Name = "client-shoppage-filter")]
         public async Task<IActionResult> Filter(string? searchBy = null,
@@ -52,5 +57,6 @@ namespace DemoApplication.Areas.Client.Controllers
 
         }
 
+        #endregion
     }
 }

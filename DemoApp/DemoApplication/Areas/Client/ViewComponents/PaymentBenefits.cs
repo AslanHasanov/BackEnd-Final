@@ -19,6 +19,7 @@ namespace DemoApplication.Areas.Client.ViewComponents
             _dataContext = dataContext;
             _fileService = fileService;
         }
+
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var model = new IndexViewModel

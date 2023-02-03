@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DemoApplication.Areas.Client.ViewModels.Account;
+using DemoApplication.Database;
+using DemoApplication.Services.Abstracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DemoApplication.Areas.Client.Controllers
 {
@@ -8,6 +12,14 @@ namespace DemoApplication.Areas.Client.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private readonly DataContext _dataContext;
+        private readonly IUserService _userService;
+
+        public AccountController(DataContext dataContext, IUserService userService)
+        {
+            _dataContext = dataContext;
+            _userService = userService;
+        }
         [HttpGet("dashboard", Name = "client-account-dashboard")]
         public IActionResult DashBoard()
         {
@@ -15,9 +27,13 @@ namespace DemoApplication.Areas.Client.Controllers
         }
 
         [HttpGet("order", Name = "client-account-order")]
-        public IActionResult Order()
+        public async Task<IActionResult> Order()
         {
-            return View();
+            var model = await _dataContext.Orders.Where(o => o.UserId == _userService.CurrentUser.Id)
+              .Select(b => new OrderViewModel(b.Id, b.CreatedAt, b.Status, b.SumTotalPrice))
+              .ToListAsync();
+
+            return View(model);
         }
 
         [HttpGet("address", Name = "client-account-address")]

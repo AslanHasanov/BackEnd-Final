@@ -16,7 +16,7 @@ namespace DemoApplication.Areas.Client.ViewComponents
         private readonly IUserService _userService;
         private readonly IFileService _fileService;
 
-        public CardPage(DataContext dataContext, IUserService userService = null, IFileService fileService = null)
+        public CardPage(DataContext dataContext, IUserService userService = null!, IFileService fileService = null!)
         {
             _dataContext = dataContext;
             _userService = userService;
@@ -45,6 +45,7 @@ namespace DemoApplication.Areas.Client.ViewComponents
 
             var productsCookieValue = HttpContext.Request.Cookies["products"];
             var productsCookieViewModel = new List<BasketCookieViewModel>();
+
             if (productsCookieValue is not null)
             {
                 productsCookieViewModel = JsonSerializer.Deserialize<List<BasketCookieViewModel>>(productsCookieValue);

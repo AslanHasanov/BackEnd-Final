@@ -17,7 +17,7 @@ namespace DemoApplication.Areas.Client.ViewComponents
         private readonly IUserService _userService;
         private readonly IFileService _fileService;
 
-        public BasketMini(DataContext dataContext, IUserService userService = null, IFileService fileService = null)
+        public BasketMini(DataContext dataContext, IUserService userService = null!, IFileService fileService = null!)
         {
             _dataContext = dataContext;
             _userService = userService;
@@ -28,7 +28,7 @@ namespace DemoApplication.Areas.Client.ViewComponents
         {
             if (_userService.IsAuthenticated)
             {
-                var model = await _dataContext.BasketProducts.Where(p => p.Basket.UserId == _userService.CurrentUser.Id)
+                var model = await _dataContext.BasketProducts.Where(p => p.Basket!.UserId == _userService.CurrentUser.Id)
                    .Select(p =>
                    new BasketCookieViewModel(p.ProductId, p.Product!.Name,
                    p.Product.ProductImages!.Take(1).FirstOrDefault()! != null
@@ -40,13 +40,12 @@ namespace DemoApplication.Areas.Client.ViewComponents
                 return View(model);
             }
 
-            if (viewModels is not null)
-            {
-                return View(viewModels);
-            }
+            if (viewModels is not null) return View(viewModels);
+    
 
             var productsCookieValue = HttpContext.Request.Cookies["products"];
             var productsCookieViewModel = new List<BasketCookieViewModel>();
+
             if (productsCookieValue is not null)
             {
                 productsCookieViewModel = JsonSerializer.Deserialize<List<BasketCookieViewModel>>(productsCookieValue);

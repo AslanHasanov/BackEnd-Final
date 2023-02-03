@@ -22,7 +22,7 @@ namespace DemoApplication.Areas.Client.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var model = await _dataContext.Categories
-                .Select(c => new CategoryListItemViewModel(c.Id, c.Title))
+                .Select(c => new CategoryListItemViewModel(c.Id, c.Title!))
                 .ToListAsync();
 
             return View(model);

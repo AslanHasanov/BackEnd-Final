@@ -26,7 +26,7 @@ namespace DemoApplication.Areas.Client.ViewComponents
                .Include(b => b.BlogAndTags).Include(b => b.BlogAndCategories).Include(b => b.BlogDisplays)
                 .Select(b => new BlogViewModel(b.Id, b.Title, b.Content,
                 b.BlogDisplays!.Take(1).FirstOrDefault() != null
-                ? _fileService.GetFileUrl(b.BlogDisplays.Take(1).FirstOrDefault()!.FileNameInSystem, Contracts.File.UploadDirectory.Blog)
+                ? _fileService.GetFileUrl(b.BlogDisplays!.Take(1).FirstOrDefault()!.FileNameInSystem, Contracts.File.UploadDirectory.Blog)
                 : String.Empty,
                 b.BlogDisplays!.FirstOrDefault()!.IsImage,
                 b.BlogDisplays!.FirstOrDefault()!.IsVidio,
