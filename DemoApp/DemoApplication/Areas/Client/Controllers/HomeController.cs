@@ -65,5 +65,14 @@ namespace DemoApplication.Areas.Client.Controllers
 
             return PartialView("~/Areas/Client/Views/Shared/_ProductModalPartial.cshtml", model);
         }
+
+
+        [HttpGet("indexsearch", Name = "client-homesearch-index")]
+        public async Task<IActionResult> Search(string searchBy, string search)
+        {
+
+            return RedirectToRoute("client-shoppage-index", new { searchBy = searchBy, search = search });
+
+        }
     }
 }
