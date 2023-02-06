@@ -1,5 +1,6 @@
 ﻿using DemoApplication.Areas.Client.ViewModels.Home;
 using DemoApplication.Database;
+using DemoApplication.Database.Models;
 using DemoApplication.Services.Abstracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,8 +20,23 @@ namespace DemoApplication.Areas.Client.ViewComponents
             _fileService = fileService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(string? searchBy = null,
+           string? search = null,
+           [FromQuery] int? categoryId = null, [FromQuery] int? tagId = null)
         {
+
+            var blogQuery = _dataContext.Blogs.AsQueryable();
+
+            if (searchBy == "Title")
+            {
+                blogQuery = blogQuery.Where(p => p.Title.StartsWith(search) || search == null);
+            }
+            else if (categoryId is not null || tagId is not null)
+            {
+
+                blogQuery = blogQuery.Where(b => categoryId == null || b.BlogAndCategories!.Any(bc => bc.BlogCategoryId == categoryId))
+                .Where(b => tagId == null || b.BlogAndTags!.Any(bt => bt.BlogTagId == tagId));
+            }
             var model =
                await _dataContext.Blogs
                .Include(b => b.BlogAndTags).Include(b => b.BlogAndCategories).Include(b => b.BlogDisplays)

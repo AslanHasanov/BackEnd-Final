@@ -1,0 +1,15 @@
+﻿@using DemoApplication.Areas.Client.ViewModels.Blog
+@model List<TagListItemViewModel>
+
+<div class="widgets-item">
+    <h2 class="widgets-title mb-4">Populer Tags</h2>
+    <ul class="widgets-tag">
+        @foreach (var item in Model)
+        {
+            <li>
+                <input type="hidden" value="@item.Id" />
+                <a class="select-blog-tag" asp-route="client-blog-filter">@item.Title</a>
+            </li>
+        }
+    </ul>
+</div>
